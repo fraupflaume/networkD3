@@ -9,15 +9,34 @@ specifically for force directed networks
 \url{https://github.com/d3/d3/blob/master/API.md#forces-d3-force}.
 }
 \usage{
-forceNetwork(Links, Nodes, Source, Target, Value, NodeID, Nodesize, Group,
-  height = NULL, width = NULL,
-  colourScale = JS("d3.scaleOrdinal(d3.schemeCategory20);"), fontSize = 7,
-  fontFamily = "serif", linkDistance = 50,
+forceNetwork(
+  Links,
+  Nodes,
+  Source,
+  Target,
+  Value,
+  NodeID,
+  Nodesize,
+  Group,
+  height = NULL,
+  width = NULL,
+  colourScale = JS("d3.scaleOrdinal(d3.schemeCategory20);"),
+  fontSize = 7,
+  fontFamily = "serif",
+  linkDistance = 50,
+  linkStrength = NULL,
   linkWidth = JS("function(d) { return Math.sqrt(d.value); }"),
-  radiusCalculation = JS(" Math.sqrt(d.nodesize)+6"), charge = -30,
-  linkColour = "#666", opacity = 0.6, zoom = FALSE, legend = FALSE,
-  arrows = FALSE, bounded = FALSE, opacityNoHover = 0,
-  clickAction = NULL)
+  radiusCalculation = JS(" Math.sqrt(d.nodesize)+6"),
+  charge = -30,
+  linkColour = "#666",
+  opacity = 0.6,
+  zoom = FALSE,
+  legend = FALSE,
+  arrows = FALSE,
+  bounded = FALSE,
+  opacityNoHover = 0,
+  clickAction = NULL
+)
 }
 \arguments{
 \item{Links}{a data frame object with the links between the nodes. It should
@@ -61,11 +80,16 @@ scale for the nodes. See
 
 \item{fontFamily}{font family for the node text labels.}
 
-\item{linkDistance}{numeric or character string. Either numberic fixed
+\item{linkDistance}{numeric or character string. Either numeric fixed
 distance between the links in pixels (actually arbitrary relative to the
 diagram's size). Or a JavaScript function, possibly to weight by
 \code{Value}. For example:
 \code{linkDistance = JS("function(d){return d.value * 10}")}.}
+
+\item{linkStrength}{numeric or character string; This can be set to a fixed
+strength of the distance value (which inherently reduces the strength of
+energy on the distance between nodes). This can also be a Javascript function,
+to set dynamic values, as demonstrated for the parameter \code{linkDistance}.}
 
 \item{linkWidth}{numeric or character string. Can be a numeric fixed width in
 pixels (arbitrary relative to the diagram's size). Or a JavaScript function,
