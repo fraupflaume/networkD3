@@ -239,7 +239,6 @@ forceNetwork <- function(Links,
             opacityNoHover = opacityNoHover,
             clickAction = clickAction
     )
-    message('link strength is set to ', linkStrength)
 
     # create widget
     htmlwidgets::createWidget(
