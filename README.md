@@ -13,6 +13,16 @@ This README includes information on set up and a number of basic
 examples. For more information see the package's [main
 page](http://christophergandrud.github.io/networkD3/).
 
+----
+
+**** Difference between this fork and the original repo ****
+----
+
+><span style="color: #003b70;">This fork includes the parameter `linkStrength` in the function `forceNetwork`. This is a parameter that will allow the user to create more uniform networks, by reducing the power in the other forces (primarily `charge`).</span>
+
+----
+
+
 Usage
 -----
 
