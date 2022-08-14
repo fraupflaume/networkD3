@@ -63,13 +63,22 @@ HTMLWidgets.widget({
     // set this up even if zoom = F
     var zoom = d3.zoom();
 
-    // create d3 force layout
-    force
-      .nodes(d3.values(nodes))
-      .force("link", d3.forceLink(links).distance(options.linkDistance))
-      .force("center", d3.forceCenter(width / 2, height / 2))
-      .force("charge", d3.forceManyBody().strength(options.charge))
-      .on("tick", tick);
+    // create d3 force layout {me} with defined strength
+    if(options.linkStrength) {
+        force
+          .nodes(d3.values(nodes))
+          .force("link", d3.forceLink(links).distance(options.linkDistance).strength(options.linkStrength)) // added .strength(options.linkStrength) here!!
+          .force("center", d3.forceCenter(width / 2, height / 2))
+          .force("charge", d3.forceManyBody().strength(options.charge))
+          .on("tick", tick);
+    } else {
+        force
+          .nodes(d3.values(nodes))
+          .force("link", d3.forceLink(links).distance(options.linkDistance)) // original setup
+          .force("center", d3.forceCenter(width / 2, height / 2))
+          .force("charge", d3.forceManyBody().strength(options.charge))
+          .on("tick", tick);
+    }
 
     force.alpha(1).restart();
 

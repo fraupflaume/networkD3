@@ -28,11 +28,15 @@
 #' \url{https://github.com/d3/d3/blob/master/API.md#ordinal-scales}.
 #' @param fontSize numeric font size in pixels for the node text labels.
 #' @param fontFamily font family for the node text labels.
-#' @param linkDistance numeric or character string. Either numberic fixed
+#' @param linkDistance numeric or character string. Either numeric fixed
 #' distance between the links in pixels (actually arbitrary relative to the
 #' diagram's size). Or a JavaScript function, possibly to weight by
 #' \code{Value}. For example:
 #' \code{linkDistance = JS("function(d){return d.value * 10}")}.
+#' @param linkStrength numeric or character string; This can be set to a fixed
+#' strength of the distance value (which inherently reduces the strength of
+#' energy on the distance between nodes). This can also be a Javascript function,
+#' to set dynamic values, as demonstrated for the parameter \code{linkDistance}.
 #' @param linkWidth numeric or character string. Can be a numeric fixed width in
 #' pixels (arbitrary relative to the diagram's size). Or a JavaScript function,
 #' possibly to weight by \code{Value}. The default is
@@ -159,6 +163,7 @@ forceNetwork <- function(Links,
                          fontSize = 7,
                          fontFamily = "serif",
                          linkDistance = 50,
+                         linkStrength = NULL, 
                          linkWidth = JS("function(d) { return Math.sqrt(d.value); }"),
                          radiusCalculation = JS(" Math.sqrt(d.nodesize)+6"),
                          charge = -30,
@@ -220,6 +225,7 @@ forceNetwork <- function(Links,
             fontFamily = fontFamily,
             clickTextSize = fontSize * 2.5,
             linkDistance = linkDistance,
+            linkStrength = linkStrength,             # I added this!!
             linkWidth = linkWidth,
             charge = charge,
             # linkColour = linkColour,
@@ -233,6 +239,7 @@ forceNetwork <- function(Links,
             opacityNoHover = opacityNoHover,
             clickAction = clickAction
     )
+    message('link strength is set to ', linkStrength)
 
     # create widget
     htmlwidgets::createWidget(
